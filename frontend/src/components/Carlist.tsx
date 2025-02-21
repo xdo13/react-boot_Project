@@ -3,8 +3,11 @@ import { deleteCar, getCars } from "../api/carapi";
 import { DataGrid, GridCellParams, GridColDef } from '@mui/x-data-grid';
 import { useState } from "react";
 import { Snackbar } from "@mui/material";
-import AddCar from "./addCar";
+import AddCar from "./AddCar";
 import EditCar from "./EditCar";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 function Carlist(){
 
@@ -38,15 +41,14 @@ function Carlist(){
       filterable: false,
       disableColumnMenu: true,
       renderCell: (params: GridCellParams) => (
-        <button
+        <IconButton aria-label="delete" size="small"
           onClick={() => {
             if (window.confirm(`Are you sure you want to delete ${params.row.brand} ${params.row.model}?`)){
             mutate(params.row._links.car.href);
             }
-          }}
-          >
-            Delete
-          </button>
+          }}>
+            <DeleteIcon fontSize="small" />
+          </IconButton>
       )
     }
   ];
